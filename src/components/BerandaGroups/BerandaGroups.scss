@@ -1,0 +1,294 @@
+.beranda-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 100px;
+  height: 100vh;
+  background-color: var(--color-white);
+  width: 100%;
+
+  .beranda-content {
+    width: 50%;
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--color-secondary-dark);
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--color-secondary-dark);
+      margin-bottom: 30px;
+    }
+
+    .bernda-btn-cta {
+      background-color: var(--color-accent-light);
+      color: var(--color-white);
+      padding: 12px 25px;
+      font-size: 1rem;
+      font-weight: 500;
+      border-radius: 25px;
+      transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+
+      &:hover {
+        background-color: var(--color-accent-hover);
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  .beranda-hero-image {
+    width: 50%;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  @media (max-width: 1200px) {
+    flex-direction: column-reverse;
+    justify-content: center;
+    text-align: center;
+    padding-left: 0;
+
+    .beranda-content {
+      margin-bottom: 40px;
+      width: 100%;
+    }
+
+    .beranda-hero-image {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 767px) {
+    padding: 60px 5px;
+
+    .beranda-content {
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+    }
+
+    p {
+      font-size: 0.8rem;
+    }
+
+    .bernda-btn-cta {
+      padding: 10px 20px;
+      font-size: 1rem;
+    }
+
+    .beranda-hero-image {
+      width: 100%;
+    }
+  }
+}
+
+// Features
+.beranda-features {
+  padding: 30px 30px;
+  background-color: var(--color-white);
+  text-align: center;
+  width: 100%;
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-secondary-dark);
+    margin-bottom: 40px;
+  }
+
+  .beranda-feature-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    justify-items: center;
+  }
+
+  .beranda-feature-item {
+    background-color: var(--color-accent-dark);
+    padding: 30px;
+    border-radius: 15px;
+    color: var(--color-white);
+    text-align: center;
+    transition: 0.4s ease-in-out;
+
+    &:hover {
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .beranda-feature-icon {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      color: var(--color-accent-light);
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--color-white);
+    }
+  }
+
+  @media (max-width: 1200px) {
+    .beranda-feature-item {
+      h3 {
+        font-size: 1.2rem;
+      }
+      p {
+        font-size: 0.9rem;
+      }
+    }
+  }
+
+  @media (max-width: 767px) {
+    .beranda-feature-list {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+// Testimonials
+.beranda-testimonials {
+  padding: 100px 30px;
+  background-color: var(--color-accent-dark);
+  text-align: center;
+  color: var(--color-white);
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-white);
+    margin-bottom: 50px;
+  }
+
+  .beranda-testimonial-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+
+  .beranda-testimonial-item {
+    background-color: var(--color-primary-dark);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: 0.3s ease-in-out;
+
+    &:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    p {
+      font-size: 1rem;
+      font-style: italic;
+      margin-bottom: 20px;
+    }
+
+    .beranda-customer-info {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 20px;
+
+      img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 5px;
+      }
+
+      span {
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: var(--color-accent-light);
+      }
+    }
+  }
+
+  @media (max-width: 1200px) {
+    .beranda-testimonial-list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .beranda-testimonial-list {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+// CTA
+.beranda-cta {
+  background-color: var(--color-accent-light);
+  padding: 100px 30px;
+  text-align: center;
+  color: var(--color-white);
+
+  .beranda-cta-content {
+    max-width: 800px;
+    height: auto;
+    margin: 0 auto;
+
+    h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 40px;
+    }
+
+    .beranda-btn-cta {
+      margin-top: 20px;
+      background-color: var(--color-white);
+      color: var(--color-accent-light);
+      font-size: 1.5rem;
+      font-weight: 500;
+      padding: 15px 30px;
+      border-radius: 25px;
+      transition: 0.3s ease-in-out;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+      &:hover {
+        background-color: var(--color-accent-hover);
+        color: var(--color-white);
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+      }
+    }
+  }
+
+  @media (max-width: 767px) {
+    h2 {
+      font-size: 1.5rem;
+    }
+    p {
+      font-size: 0.8rem;
+    }
+  }
+}

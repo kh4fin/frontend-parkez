@@ -1,0 +1,219 @@
+.about-main {
+  background-color: var(--color-white);
+  color: var(--color-secondary-dark);
+  padding: 100px 30px;
+  text-align: center;
+
+  .about-main-content {
+    h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--color-primary-dark);
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-bottom: 40px;
+      color: var(--color-secondary-dark);
+    }
+
+    .about-main-stats {
+      display: flex;
+      justify-content: space-around;
+      gap: 30px;
+      margin-top: 20px;
+
+      .about-main-stat-item {
+        h3 {
+          font-size: 1.5rem;
+          color: var(--color-accent-light);
+          font-weight: 700;
+        }
+
+        p {
+          font-size: 1rem;
+          color: var(--color-secondary-dark);
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 767px) {
+    .about-main-content {
+      .about-main-stats {
+        flex-direction: column;
+        gap: 20px;
+      }
+    }
+  }
+}
+
+// Garage
+.about-garage {
+  width: 100%;
+  background-color: var(--color-accent-dark);
+  color: var(--color-white);
+  padding: 20px 30px;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  .about-garage-content {
+    width: 30%;
+    font-size: 1.5rem;
+  }
+
+  .about-garage-image {
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    .about-img {
+      width: 40%;
+    }
+
+    .about-garage-desc {
+      width: 30%;
+      font-size: 1.3rem;
+    }
+  }
+
+  @media (max-width: 1200px) {
+    padding: 50px 30px;
+
+    .about-garage-content {
+      font-size: 1rem;
+    }
+
+    .about-garage-image {
+      .about-img {
+        max-width: 40%;
+
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
+    }
+
+    .about-garage-desc {
+      width: 30%;
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+
+    .about-garage-content {
+      width: 100%;
+    }
+
+    .about-garage-image {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+
+      .about-img {
+        width: 100%;
+      }
+
+      .about-garage-desc {
+        width: 100%;
+        font-size: 1.3rem;
+      }
+    }
+  }
+}
+
+// EZGARAGE
+.about-ezgarage {
+  background-color: var(--color-white);
+  color: var(--color-accent-dark);
+  padding: 20px 30px;
+  padding-bottom: 200px;
+  text-align: center;
+
+  h1 {
+    margin-top: 20px;
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  .about-ezgarage-content {
+    width: 80%;
+    margin: 20px auto;
+    text-align: center;
+
+    p {
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+
+    ul {
+      list-style-type: none;
+      text-align: left;
+      padding: 0;
+
+      li {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 10px;
+        font-weight: 500;
+
+        &::before {
+          content: "✓";
+          color: var(--color-accent-dark);
+          flex-shrink: 0;
+          margin-right: 15px;
+          font-weight: 700;
+          font-size: 1.5rem;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 1200px) {
+    .about-image {
+      img {
+        max-width: 100%;
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    .about-ezgarage-content {
+      width: 100%;
+      margin: 0 auto;
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .about-image {
+      img {
+        max-width: 100%;
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    .about-ezgarage-content {
+      width: 100%;
+      margin: 0 auto;
+      text-align: center;
+
+      p {
+        width: 100%;
+      }
+    }
+  }
+}
