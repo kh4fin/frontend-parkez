@@ -1,0 +1,318 @@
+.history-header {
+  display: none;
+}
+
+// .history-btn-slider {
+//   position: relative;
+//   display: flex;
+//   align-items: center;
+//   justify-content: space-between;
+//   width: 200px;
+//   height: 40px;
+//   background-color: #109717;
+//   border-radius: 20px;
+//   cursor: pointer;
+//   margin: 20px auto;
+
+//   .history-slider-circle {
+//     position: absolute;
+//     width: 100px;
+//     height: 40px;
+//     background-color: rgb(252, 102, 102);
+//     border-radius: 20px;
+//     top: 0px;
+//     left: 0px;
+//     transition: all 0.3s ease;
+//   }
+
+//   &.active .history-slider-circle {
+//     left: calc(100% - 100px);
+//   }
+// }
+
+.history-btn-slider {
+  position: relative;
+  width: 200px;
+  border: 1px solid var(--color-accent-dark);
+  margin: 70px auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 50px;
+  overflow: hidden;
+  cursor: pointer;
+  background-color: var(--color-accent-light);
+
+  .history-slider-circle {
+    position: absolute;
+    left: 0;
+    margin: 0;
+    width: 100px;
+    height: 100%;
+    background-color: var(--color-white);
+    border-radius: 50px;
+    transition: 0.3s ease-in-out;
+
+    &.active {
+      .history-slider-circle {
+        left: 100px;
+      }
+    }
+  }
+
+  .history-transaksi,
+  .history-parkir {
+    padding: 10px 10px;
+    font-weight: bold;
+    color: var(--color-accent-dark);
+    z-index: 1;
+  }
+
+  .history-parkir {
+    padding: 10px 15px;
+    text-align: right;
+  }
+}
+
+.history-history {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  padding-bottom: 100px;
+
+  .history-months {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    .history-month {
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: #565757;
+
+      &.active {
+        font-weight: bold;
+        color: #161616;
+      }
+    }
+  }
+
+  .history-row {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    .history-date {
+      width: 100%;
+      text-align: left;
+      padding: 0.5rem 2rem;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .history-cards {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+
+      .history-card {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.5rem 2rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+
+        .history-left {
+          width: 60%;
+          text-align: left;
+
+          .history-subtitle {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--color-accent-dark);
+          }
+
+          .history-desc {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-accent-dark);
+          }
+        }
+
+        .history-right > p {
+          font-size: 20px;
+          font-weight: 600;
+          color: var(--color-accent-dark);
+        }
+      }
+    }
+  }
+}
+
+#parkir {
+  display: none;
+}
+
+@media (max-width: 1200px) {
+  .history-header {
+    width: 100%;
+    height: 60px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+  }
+
+  .history-btn-slider {
+    width: 200px;
+    margin: 70px auto 20px;
+
+    .history-slider-circle {
+      width: 100px;
+
+      &.active {
+        width: 120px;
+      }
+    }
+
+    .history-transaksi,
+    .history-parkir {
+      padding: 10px 10px;
+    }
+
+    .history-parkir {
+      padding: 10px 15px;
+    }
+  }
+
+  .history-history {
+    gap: 15px;
+    padding-bottom: 100px;
+
+    .history-months {
+      .history-month {
+        font-size: 1rem;
+      }
+    }
+
+    .history-row {
+      .history-date {
+        font-size: 16px;
+      }
+
+      .history-cards {
+        gap: 10px;
+
+        .history-card {
+          padding: 0.5rem 2rem;
+
+          .history-left {
+            .history-subtitle {
+              font-size: 14px;
+            }
+
+            .history-desc {
+              font-size: 12px;
+            }
+          }
+
+          .history-right > p {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .history-header {
+    width: 100%;
+    height: 60px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+  }
+
+  .history-btn-slider {
+    width: 200px;
+    margin: 70px auto 20px;
+
+    .history-slider-circle {
+      width: 100px;
+
+      &.active {
+        width: 120px;
+      }
+    }
+
+    .history-transaksi,
+    .history-parkir {
+      padding: 10px 10px;
+    }
+
+    .history-parkir {
+      padding: 10px 15px;
+    }
+  }
+
+  .history-history {
+    gap: 15px;
+    padding-bottom: 100px;
+
+    .history-months {
+      .history-month {
+        font-size: 1rem;
+      }
+    }
+
+    .history-row {
+      .history-date {
+        font-size: 16px;
+      }
+
+      .history-cards {
+        gap: 10px;
+
+        .history-card {
+          padding: 0.5rem 2rem;
+
+          .history-left {
+            .history-subtitle {
+              font-size: 14px;
+            }
+
+            .history-desc {
+              font-size: 12px;
+            }
+          }
+
+          .history-right > p {
+            font-size: 12px;
+          }
+        }
+      }
+    }
+  }
+}

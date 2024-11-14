@@ -103,53 +103,58 @@ const HomePricing = () => {
           </div>
         </div>
 
-        {/* Tampilkan pricing plans yang diambil dari API */}
         <div className="home-pricing-cards">
-          {pricingPlans.slice(0, 4).map((plan, index) => (
-            <div key={index} className="home-pricing-card">
-              <h3>{plan.nama_paket}</h3>
-              <p className="home-pricing-card-desc">{plan.deskripsi}</p>
-              <div className="home-pricing-discount">
-                <p>{plan.diskon}</p>
-                <p className="home-pricing-btn-discount">Diskon</p>
+          {pricingPlans
+            .filter((plan) => plan.tipe_paket === "parkez")
+            .slice(0, 4)
+            .map((plan, index) => (
+              <div key={index} className="home-pricing-card">
+                <h3>{plan.nama_paket}</h3>
+                <p className="home-pricing-card-desc">{plan.deskripsi}</p>
+                <div className="home-pricing-discount">
+                  <p>{plan.diskon}</p>
+                  <p className="home-pricing-btn-discount">Diskon</p>
+                </div>
+                <p className="home-pricing-price">{plan.harga}</p>
+                <div className="home-pricing-checkout">
+                  <NavLink onClick={() => handlePurchase(plan.id)}>
+                    Pilih Paket
+                  </NavLink>
+                </div>
+                <ul>
+                  {plan.benefits.split(",").map((benefit, i) => (
+                    <li key={i}>{benefit.trim()}</li>
+                  ))}
+                </ul>
               </div>
-              <p className="home-pricing-price">{plan.harga}</p>
-              <div className="home-pricing-checkout">
-                <NavLink onClick={() => handlePurchase(plan.id)}>
-                  Pilih Paket
-                </NavLink>
-              </div>
-              <ul>
-                {plan.benefits.split(",").map((benefit, i) => (
-                  <li key={i}>{benefit.trim()}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
+            ))}
         </div>
 
         <div className="home-pricing-cards-2">
-          {pricingPlans.slice(0, 2).map((plan, index) => (
-            <div key={index} className="home-pricing-card">
-              <h3>{plan.nama_paket}</h3>
-              <p className="home-pricing-card-desc">{plan.deskripsi}</p>
-              <div className="home-pricing-discount">
-                <p>{plan.harga}</p>
-                <p className="home-pricing-btn-discount">Diskon</p>
+          {pricingPlans
+            .filter((plan) => plan.tipe_paket === "parkez")
+            .slice(0, 2)
+            .map((plan, index) => (
+              <div key={index} className="home-pricing-card">
+                <h3>{plan.nama_paket}</h3>
+                <p className="home-pricing-card-desc">{plan.deskripsi}</p>
+                <div className="home-pricing-discount">
+                  <p>{plan.diskon}</p>
+                  <p className="home-pricing-btn-discount">Diskon</p>
+                </div>
+                <p className="home-pricing-price">{plan.harga}</p>
+                <div className="home-pricing-checkout">
+                  <NavLink onClick={() => handlePurchase(plan.id)}>
+                    Pilih Paket
+                  </NavLink>
+                </div>
+                <ul>
+                  {plan.benefits.split(",").map((benefit, i) => (
+                    <li key={i}>{benefit.trim()}</li>
+                  ))}
+                </ul>
               </div>
-              <p className="home-pricing-price">{plan.diskon}</p>
-              <div className="home-pricing-checkout">
-                <a href="#" onClick={() => handlePurchase(plan.id)}>
-                  Pilih Paket
-                </a>
-              </div>
-              <ul>
-                {plan.benefits.split(",").map((benefit, i) => (
-                  <li key={i}>{benefit.trim()}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
+            ))}
         </div>
       </div>
 
@@ -170,51 +175,57 @@ const HomePricing = () => {
         </div>
 
         <div className="home-pricing-cards">
-          {pricingPlans.slice(0, 4).map((plan, index) => (
-            <div key={index} className="home-pricing-card">
-              <h3>{plan.nama_paket}</h3>
-              <p className="home-pricing-card-desc">{plan.deskripsi}</p>
-              <div className="home-pricing-discount">
-                <p>{plan.diskon}</p>
-                <p className="home-pricing-btn-discount">Diskon</p>
+          {pricingPlans
+            .filter((plan) => plan.tipe_paket === "ezgarage")
+            .slice(0, 4)
+            .map((plan, index) => (
+              <div key={index} className="home-pricing-card">
+                <h3>{plan.nama_paket}</h3>
+                <p className="home-pricing-card-desc">{plan.deskripsi}</p>
+                <div className="home-pricing-discount">
+                  <p>{plan.diskon}</p>
+                  <p className="home-pricing-btn-discount">Diskon</p>
+                </div>
+                <p className="home-pricing-price">{plan.harga}</p>
+                <div className="home-pricing-checkout">
+                  <a href="#" onClick={() => handlePurchase(plan.id)}>
+                    Pilih Paket
+                  </a>
+                </div>
+                <ul>
+                  {plan.benefits.split(",").map((benefit, i) => (
+                    <li key={i}>{benefit.trim()}</li>
+                  ))}
+                </ul>
               </div>
-              <p className="home-pricing-price">{plan.harga}</p>
-              <div className="home-pricing-checkout">
-                <a href="#" onClick={() => handlePurchase(plan.id)}>
-                  Pilih Paket
-                </a>
-              </div>
-              <ul>
-                {plan.benefits.split(",").map((benefit, i) => (
-                  <li key={i}>{benefit.trim()}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
+            ))}
         </div>
 
         <div className="home-pricing-cards-2">
-          {pricingPlans.slice(0, 2).map((plan, index) => (
-            <div key={index} className="home-pricing-card">
-              <h3>{plan.nama_paket}</h3>
-              <p className="home-pricing-card-desc">{plan.deskripsi}</p>
-              <div className="home-pricing-discount">
-                <p>{plan.harga}</p>
-                <p className="home-pricing-btn-discount">Diskon</p>
+          {pricingPlans
+            .filter((plan) => plan.tipe_paket === "ezgarage")
+            .slice(0, 2)
+            .map((plan, index) => (
+              <div key={index} className="home-pricing-card">
+                <h3>{plan.nama_paket}</h3>
+                <p className="home-pricing-card-desc">{plan.deskripsi}</p>
+                <div className="home-pricing-discount">
+                  <p>{plan.diskon}</p>
+                  <p className="home-pricing-btn-discount">Diskon</p>
+                </div>
+                <p className="home-pricing-price">{plan.harga}</p>
+                <div className="home-pricing-checkout">
+                  <a href="#" onClick={() => handlePurchase(plan.id)}>
+                    Pilih Paket
+                  </a>
+                </div>
+                <ul>
+                  {plan.benefits.split(",").map((benefit, i) => (
+                    <li key={i}>{benefit.trim()}</li>
+                  ))}
+                </ul>
               </div>
-              <p className="home-pricing-price">{plan.diskon}</p>
-              <div className="home-pricing-checkout">
-                <a href="#" onClick={() => handlePurchase(plan.id)}>
-                  Pilih Paket
-                </a>
-              </div>
-              <ul>
-                {plan.benefits.split(",").map((benefit, i) => (
-                  <li key={i}>{benefit.trim()}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
+            ))}
         </div>
       </div>
     </div>

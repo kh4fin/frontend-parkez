@@ -2,11 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../utils/axiosConfig";
 import Navbar from "../../components/Navbar/Navbar";
-import LokasiHeader from "../../components/LokasiGroups/LokasiHeader";
-import LokasiOne from "../../components/LokasiGroups/LokasiOne";
-import LokasiTwo from "../../components/LokasiGroups/LokasiTwo";
+import HistoryGroups from "../../components/HistoryGroups";
 
-const Lokasi = () => {
+const History = () => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
@@ -33,11 +31,9 @@ const Lokasi = () => {
   return (
     <div>
       <Navbar />
-      <LokasiHeader />
-      <LokasiOne />
-      <LokasiTwo />
+      <HistoryGroups />
     </div>
   );
 };
 
-export default Lokasi;
+export default History;

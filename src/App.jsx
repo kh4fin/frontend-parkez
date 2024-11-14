@@ -12,6 +12,9 @@ import Dashboard from "./pages/Dashboard";
 import Pricing from "./pages/Pricing";
 import Kontak from "./pages/Kontak";
 import Waiting from "./pages/Auth/Waiting";
+import Parkir from "./pages/Parkir";
+import History from "./pages/History";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -37,6 +40,9 @@ function App() {
         <Route path="/parkez-lists" element={<ParkezChardList />} />
         <Route path="/ezgarage-lists" element={<ParkezChardList />} />
         <Route path="/lokasi" element={<Lokasi />} />
+        <Route path="/parkir" element={<Parkir />} />
+        <Route path="/riwayat" element={<History />} />
+        <Route path="/profile" element={<Profile />} />
 
         {/* Dashboard Admin Routes */}
         <Route path="/dashboard-admin/*" element={<Dashboard />} />
