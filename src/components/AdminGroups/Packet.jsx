@@ -52,7 +52,6 @@ const Packet = () => {
           <tr>
             <th className="border px-4 py-2">ID</th>
             <th className="border px-4 py-2">Nama Paket</th>
-            <th className="border px-4 py-2">Deskripsi</th>
             <th className="border px-4 py-2">Harga</th>
             <th className="border px-4 py-2">Diskon</th>
             <th className="border px-4 py-2">Durasi (Hari)</th>
@@ -67,9 +66,7 @@ const Packet = () => {
                 <td className="border px-4 py-2 text-center">
                   {packet.nama_paket}
                 </td>
-                <td className="border px-4 py-2 text-center">
-                  {packet.deskripsi}
-                </td>
+
                 <td className="border px-4 py-2 text-center">
                   Rp {packet.harga.toLocaleString()}
                 </td>
