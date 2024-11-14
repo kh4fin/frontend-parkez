@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const EmailVerification = () => {
-  const { key } = useParams(); // Menangkap key dari URL
+  const { key } = useParams();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
@@ -17,17 +17,16 @@ const EmailVerification = () => {
       const response = await axios.post(
         "http://localhost:8000/dj-rest-auth/registration/verify-email/",
         {
-          key: key, // Mengirim key yang didapat dari URL
+          key: key,
         }
       );
 
       setSuccess("Email verified successfully!");
       setLoading(false);
 
-      // Redirect ke halaman login atau dashboard setelah verifikasi berhasil
       setTimeout(() => {
         navigate("/login");
-      }, 2000); // Redirect setelah 2 detik
+      }, 2000);
     } catch (error) {
       setLoading(false);
       setError("Failed to verify email. Please try again.");
@@ -41,7 +40,11 @@ const EmailVerification = () => {
       {success && <p style={{ color: "green" }}>{success}</p>}
 
       {!success && (
-        <button onClick={handleVerifyEmail} disabled={loading}>
+        <button
+          className="border-t-indigo-500"
+          onClick={handleVerifyEmail}
+          disabled={loading}
+        >
           {loading ? "Verifying..." : "Verify Email"}
         </button>
       )}

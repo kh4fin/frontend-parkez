@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import {
   FaHome,
@@ -6,10 +6,32 @@ import {
   FaParking,
   FaHistory,
   FaUser,
+  FaTachometerAlt, // Icon for Dashboard
 } from "react-icons/fa";
+import axiosInstance from "../../utils/axiosConfig";
 import "./styles.scss";
 
 const Navbar = () => {
+  const [userRole, setUserRole] = useState(null);
+
+  useEffect(() => {
+    const fetchUserRole = async () => {
+      try {
+        const response = await axiosInstance.get("/accounts/users/me/");
+        const role = response.data.role;
+
+        localStorage.setItem("userRole", role);
+        setUserRole(role);
+      } catch (error) {
+        console.error("Error fetching user role:", error);
+      }
+    };
+
+    fetchUserRole();
+  }, []);
+
+  const handleDashboardClick = () => {};
+
   return (
     <nav className="navbar">
       <NavLink to="/home" className="logo">
@@ -76,6 +98,22 @@ const Navbar = () => {
             <span className="text">Profile</span>
           </NavLink>
         </li>
+
+        {userRole === "owner" && (
+          <li>
+            <NavLink
+              to="/dashboard-admin"
+              aria-label="Dashboard"
+              className={({ isActive }) => (isActive ? "link active" : "link")}
+              onClick={handleDashboardClick}
+            >
+              <div className="icon">
+                <FaTachometerAlt />
+              </div>
+              <span className="text">Dashboard</span>
+            </NavLink>
+          </li>
+        )}
       </ul>
     </nav>
   );

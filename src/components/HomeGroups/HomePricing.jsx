@@ -1,54 +1,82 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./HomePricing.scss";
+import axiosInstance from "../../utils/axiosConfig";
 
 const HomePricing = () => {
-  const pricingPlans = [
-    {
-      title: "EZ Ride Daily",
-      desc: "Cocok untuk anda yang mengunjungi banyak tempat dalam sehari.",
-      originalPrice: "Rp 20.000",
-      discountedPrice: "Rp 10.000/hari",
-      benefits: ["Parkir 24 jam", "Akses ke semua lokasi", "Keamanan terjamin"],
-    },
-    {
-      title: "EZ Ride Weekly",
-      desc: "Kunjungan seminggu yang terbaik bagi anda.",
-      originalPrice: "Rp 75.000",
-      discountedPrice: "Rp 60.000/minggu",
-      benefits: [
-        "Parkir 24 jam",
-        "Akses ke semua lokasi",
-        "Keamanan terjamin",
-        "Diskon 10% untuk perpanjangan",
-      ],
-    },
-    {
-      title: "EZ Ride Monthly",
-      desc: "Sering mengunjungi tempat yang sama? Paket bulanan adalah pilihan terbaik.",
-      originalPrice: "Rp 300.000",
-      discountedPrice: "Rp 200.000/bulan",
-      benefits: [
-        "Parkir 24 jam",
-        "Akses ke semua lokasi",
-        "Keamanan terjamin",
-        "Diskon 10% untuk perpanjangan",
-      ],
-    },
-    {
-      title: "EZ Ride Yearly",
-      desc: "Pilihan hemat dengan berbagai keuntungan untuk pengguna setia.",
-      originalPrice: "Rp 2.700.000",
-      discountedPrice: "Rp 2.000.000/tahun",
-      benefits: [
-        "Parkir 24 jam",
-        "Akses ke semua lokasi",
-        "Keamanan terjamin",
-        "Support prioritas",
-        "Diskon 15% untuk perpanjangan",
-      ],
-    },
-  ];
+  const [pricingPlans, setPricingPlans] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchPricingPlans = async () => {
+      try {
+        const response = await axiosInstance.get(
+          `${import.meta.env.VITE_API_URL}/api/paket/`
+        );
+        setPricingPlans(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching pricing plans:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchPricingPlans();
+  }, []);
+
+  useEffect(() => {
+    const loadMidtransScript = () => {
+      let scriptTag = document.createElement("script");
+      scriptTag.src = "https://app.midtrans.com/snap/snap.js";
+      scriptTag.setAttribute(
+        "data-client-key",
+        import.meta.env.VITE_MIDTRANS_CLIENT_KEY
+      );
+      document.body.appendChild(scriptTag);
+    };
+
+    loadMidtransScript();
+  }, []);
+
+  const handlePurchase = async (planId) => {
+    try {
+      // Meminta Snap token dari backend
+      const response = await axiosInstance.post(
+        `${import.meta.env.VITE_API_URL}/api/beli-paket/`,
+        { paketId: planId }
+      );
+
+      const { snapToken } = response.data;
+      console.log(response.data);
+
+      // Memunculkan Midtrans Snap Popup
+      window.snap.pay(snapToken, {
+        onSuccess: function (result) {
+          alert("Pembayaran berhasil!");
+          console.log(result);
+        },
+        onPending: function (result) {
+          alert("Pembayaran pending, menunggu konfirmasi.");
+          console.log(result);
+        },
+        onError: function (result) {
+          alert("Pembayaran gagal!");
+          console.log(result);
+        },
+        onClose: function () {
+          alert("Anda menutup pop-up tanpa menyelesaikan pembayaran.");
+        },
+      });
+    } catch (error) {
+      console.error("Error during purchase:", error);
+      alert("Terjadi kesalahan, silakan coba lagi.");
+    }
+  };
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <div className="home-pricing">
       <div className="home-pricing-nav">
@@ -74,46 +102,50 @@ const HomePricing = () => {
             </NavLink>
           </div>
         </div>
+
+        {/* Tampilkan pricing plans yang diambil dari API */}
         <div className="home-pricing-cards">
           {pricingPlans.slice(0, 4).map((plan, index) => (
             <div key={index} className="home-pricing-card">
-              <h3>{plan.title}</h3>
-              <p className="home-pricing-card-desc">{plan.desc}</p>
+              <h3>{plan.nama_paket}</h3>
+              <p className="home-pricing-card-desc">{plan.deskripsi}</p>
               <div className="home-pricing-discount">
-                <p>{plan.originalPrice}</p>
+                <p>{plan.diskon}</p>
                 <p className="home-pricing-btn-discount">Diskon</p>
               </div>
-              <p className="home-pricing-price">{plan.discountedPrice}</p>
+              <p className="home-pricing-price">{plan.harga}</p>
               <div className="home-pricing-checkout">
-                <a href="#">Pilih Paket</a>
+                <NavLink onClick={() => handlePurchase(plan.id)}>
+                  Pilih Paket
+                </NavLink>
               </div>
-              <div className="home-pricing-r"></div>
               <ul>
-                {plan.benefits.map((benefit, i) => (
-                  <li key={i}>{benefit}</li>
+                {plan.benefits.split(",").map((benefit, i) => (
+                  <li key={i}>{benefit.trim()}</li>
                 ))}
               </ul>
             </div>
           ))}
         </div>
+
         <div className="home-pricing-cards-2">
-          {/* Tampilkan 4 cards di sini dengan map */}
           {pricingPlans.slice(0, 2).map((plan, index) => (
             <div key={index} className="home-pricing-card">
-              <h3>{plan.title}</h3>
-              <p className="home-pricing-card-desc">{plan.desc}</p>
+              <h3>{plan.nama_paket}</h3>
+              <p className="home-pricing-card-desc">{plan.deskripsi}</p>
               <div className="home-pricing-discount">
-                <p>{plan.originalPrice}</p>
+                <p>{plan.harga}</p>
                 <p className="home-pricing-btn-discount">Diskon</p>
               </div>
-              <p className="home-pricing-price">{plan.discountedPrice}</p>
+              <p className="home-pricing-price">{plan.diskon}</p>
               <div className="home-pricing-checkout">
-                <a href="#">Pilih Paket</a>
+                <a href="#" onClick={() => handlePurchase(plan.id)}>
+                  Pilih Paket
+                </a>
               </div>
-              <div className="home-pricing-r"></div>
               <ul>
-                {plan.benefits.map((benefit, i) => (
-                  <li key={i}>{benefit}</li>
+                {plan.benefits.split(",").map((benefit, i) => (
+                  <li key={i}>{benefit.trim()}</li>
                 ))}
               </ul>
             </div>
@@ -136,45 +168,49 @@ const HomePricing = () => {
             </NavLink>
           </div>
         </div>
+
         <div className="home-pricing-cards">
           {pricingPlans.slice(0, 4).map((plan, index) => (
             <div key={index} className="home-pricing-card">
-              <h3>{plan.title}</h3>
-              <p className="home-pricing-card-desc">{plan.desc}</p>
+              <h3>{plan.nama_paket}</h3>
+              <p className="home-pricing-card-desc">{plan.deskripsi}</p>
               <div className="home-pricing-discount">
-                <p>{plan.originalPrice}</p>
+                <p>{plan.diskon}</p>
                 <p className="home-pricing-btn-discount">Diskon</p>
               </div>
-              <p className="home-pricing-price">{plan.discountedPrice}</p>
+              <p className="home-pricing-price">{plan.harga}</p>
               <div className="home-pricing-checkout">
-                <a href="#">Pilih Paket</a>
+                <a href="#" onClick={() => handlePurchase(plan.id)}>
+                  Pilih Paket
+                </a>
               </div>
-              <div className="home-pricing-r"></div>
               <ul>
-                {plan.benefits.map((benefit, i) => (
-                  <li key={i}>{benefit}</li>
+                {plan.benefits.split(",").map((benefit, i) => (
+                  <li key={i}>{benefit.trim()}</li>
                 ))}
               </ul>
             </div>
           ))}
         </div>
+
         <div className="home-pricing-cards-2">
           {pricingPlans.slice(0, 2).map((plan, index) => (
             <div key={index} className="home-pricing-card">
-              <h3>{plan.title}</h3>
-              <p className="home-pricing-card-desc">{plan.desc}</p>
+              <h3>{plan.nama_paket}</h3>
+              <p className="home-pricing-card-desc">{plan.deskripsi}</p>
               <div className="home-pricing-discount">
-                <p>{plan.originalPrice}</p>
+                <p>{plan.harga}</p>
                 <p className="home-pricing-btn-discount">Diskon</p>
               </div>
-              <p className="home-pricing-price">{plan.discountedPrice}</p>
+              <p className="home-pricing-price">{plan.diskon}</p>
               <div className="home-pricing-checkout">
-                <a href="#">Pilih Paket</a>
+                <a href="#" onClick={() => handlePurchase(plan.id)}>
+                  Pilih Paket
+                </a>
               </div>
-              <div className="home-pricing-r"></div>
               <ul>
-                {plan.benefits.map((benefit, i) => (
-                  <li key={i}>{benefit}</li>
+                {plan.benefits.split(",").map((benefit, i) => (
+                  <li key={i}>{benefit.trim()}</li>
                 ))}
               </ul>
             </div>

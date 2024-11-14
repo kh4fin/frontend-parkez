@@ -1,6 +1,4 @@
-import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
 import "./App.scss";
 import Home from "./pages/Home";
 import Lokasi from "./pages/Lokasi";
@@ -10,30 +8,38 @@ import About from "./pages/About";
 import Login from "./pages/Auth/Login";
 import SignUp from "./pages/Auth/SignUp";
 import EmailVerification from "./pages/Auth/EmailVerification";
+import Dashboard from "./pages/Dashboard";
+import Pricing from "./pages/Pricing";
+import Kontak from "./pages/Kontak";
+import Waiting from "./pages/Auth/Waiting";
 
 function App() {
   return (
     <Router>
       <Routes>
-        {/* <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<SignUp />} />
-        <Route
-          path="/dj-rest-auth/registration/account-confirm-email/:key/"
-          element={<EmailVerification />}
-        /> */}
+        {/* Public Routes */}
+        <Route path="/" element={<Beranda />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/harga" element={<Pricing />} />
+        <Route path="/kontak" element={<Kontak />} />
 
-        {/* <Route path="/" element={<HomeBefore />} /> */}
+        {/* Auth Routes */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<SignUp />} />
+        <Route path="/waiting" element={<Waiting />} />
         <Route
           path="/dj-rest-auth/registration/account-confirm-email/:key/"
           element={<EmailVerification />}
         />
-        <Route path="/" element={<Beranda />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<SignUp />} />
-        <Route path="/about" element={<About />} />
+
+        {/* Users Routes */}
         <Route path="/home" element={<Home />} />
         <Route path="/parkez-lists" element={<ParkezChardList />} />
+        <Route path="/ezgarage-lists" element={<ParkezChardList />} />
         <Route path="/lokasi" element={<Lokasi />} />
+
+        {/* Dashboard Admin Routes */}
+        <Route path="/dashboard-admin/*" element={<Dashboard />} />
       </Routes>
     </Router>
   );

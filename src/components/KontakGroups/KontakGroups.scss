@@ -1,0 +1,111 @@
+.kontak-groups {
+  padding: 100px 30px;
+  background-color: var(--color-white);
+  color: var(--color-white);
+  text-align: center;
+
+  &-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--color-secondary-dark);
+  }
+
+  &-section-description {
+    font-size: 1rem;
+    margin-bottom: 40px;
+    color: var(--color-secondary-dark);
+  }
+
+  &-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    height: auto;
+  }
+
+  &-contact-form {
+    background-color: var(--color-white);
+    color: var(--color-secondary-dark);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    text-align: left;
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid var(--color-secondary-dark);
+      font-size: 1rem;
+    }
+
+    button {
+      background-color: var(--color-accent-light);
+      color: var(--color-white);
+      padding: 10px 20px;
+      border-radius: 25px;
+      border: none;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: var(--color-accent-hover);
+      }
+    }
+  }
+
+  &-contact-info {
+    color: var(--color-secondary-dark);
+    text-align: center;
+    width: 100%;
+
+    h3 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+
+    .link {
+      font-size: 1rem;
+      margin-bottom: 15px;
+      display: block;
+
+      i {
+        margin-right: 10px;
+      }
+    }
+  }
+
+  @media (max-width: 767px) {
+    & {
+      height: auto;
+    }
+
+    &-container {
+      height: auto;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    &-contact-form,
+    &-contact-info {
+      max-width: 100%;
+    }
+  }
+}
