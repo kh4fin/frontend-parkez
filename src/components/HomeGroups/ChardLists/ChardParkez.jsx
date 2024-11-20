@@ -1,62 +1,108 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axiosInstance from "../../../utils/axiosConfig";
 import { NavLink } from "react-router-dom";
 import { FaParking } from "react-icons/fa";
+import { IoMdArrowRoundBack } from "react-icons/io";
 import "./ChardParkez.scss";
 
 const ChardParkez = () => {
-  const pricingPlans = [
-    {
-      title: "EZ Ride Daily",
-      desc: "Cocok untuk anda yang mengunjungi banyak tempat dalam sehari.",
-      originalPrice: "Rp 20.000",
-      discountedPrice: "Rp 10.000/hari",
-      benefits: ["Parkir 24 jam", "Akses ke semua lokasi", "Keamanan terjamin"],
-    },
-    {
-      title: "EZ Ride Weekly",
-      desc: "Kunjungan seminggu yang terbaik bagi anda.",
-      originalPrice: "Rp 75.000",
-      discountedPrice: "Rp 60.000/minggu",
-      benefits: [
-        "Parkir 24 jam",
-        "Akses ke semua lokasi",
-        "Keamanan terjamin",
-        "Diskon 10% untuk perpanjangan",
-      ],
-    },
-    {
-      title: "EZ Ride Monthly",
-      desc: "Sering mengunjungi tempat yang sama? Paket bulanan adalah pilihan terbaik.",
-      originalPrice: "Rp 300.000",
-      discountedPrice: "Rp 200.000/bulan",
-      benefits: [
-        "Parkir 24 jam",
-        "Akses ke semua lokasi",
-        "Keamanan terjamin",
-        "Diskon 10% untuk perpanjangan",
-      ],
-    },
-    {
-      title: "EZ Ride Yearly",
-      desc: "Pilihan hemat dengan berbagai keuntungan untuk pengguna setia.",
-      originalPrice: "Rp 2.700.000",
-      discountedPrice: "Rp 2.000.000/tahun",
-      benefits: [
-        "Parkir 24 jam",
-        "Akses ke semua lokasi",
-        "Keamanan terjamin",
-        "Support prioritas",
-        "Diskon 15% untuk perpanjangan",
-      ],
-    },
-  ];
+  const [pricingPlans, setPricingPlans] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchPricingPlans = async () => {
+      try {
+        const response = await axiosInstance.get(
+          `${import.meta.env.VITE_API_URL}/api/paket/`
+        );
+        setPricingPlans(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching pricing plans:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchPricingPlans();
+  }, []);
+
+  useEffect(() => {
+    const midtransScriptUrl = "https://app.sandbox.midtrans.com/snap/snap.js";
+
+    let scriptTag = document.createElement("script");
+    scriptTag.src = midtransScriptUrl;
+
+    const myMidtransClientKey = import.meta.env.VITE_MIDTRANS_CLIENT_KEY;
+    scriptTag.setAttribute("data-client-key", myMidtransClientKey);
+
+    document.body.appendChild(scriptTag);
+
+    return () => {
+      document.body.removeChild(scriptTag);
+    };
+  }, []);
+
+  const handlePurchase = async (planId) => {
+    try {
+      const response = await axiosInstance.post(
+        `${import.meta.env.VITE_API_URL}/api/beli-paket/`,
+        {
+          paketId: planId,
+        }
+      );
+
+      const { snapToken, midtrans_url } = response.data;
+      console.log(response.data);
+
+      window.snap.pay(snapToken, {
+        onSuccess: async function (result) {
+          alert("Pembayaran berhasil!");
+
+          try {
+            await axiosInstance.post(
+              `${import.meta.env.VITE_API_URL}/api/midtrans-notification/`,
+              {
+                transactionId: result.transaction_id,
+                orderId: result.order_id,
+                status: result.transaction_status,
+              }
+            );
+
+            window.location.href = "/home";
+          } catch (error) {
+            console.error("Error saat mengirim data transaksi:", error);
+          }
+
+          console.log(result);
+        },
+        onPending: function (result) {
+          alert("Pembayaran pending, menunggu konfirmasi.");
+          console.log(result);
+        },
+        onError: function (result) {
+          alert("Pembayaran gagal!");
+          console.log(result);
+        },
+        onClose: function () {
+          alert("Anda menutup pop-up tanpa menyelesaikan pembayaran.");
+        },
+      });
+    } catch (error) {
+      console.error("Error during purchase:", error);
+      alert("Terjadi kesalahan, silakan coba lagi.");
+    }
+  };
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div>
       <nav className="chardlist-pricing-nav">
         <NavLink to="/home" className="chardlist-icon">
           {/* <i className="fas fa-arrow-left"></i> */}
-          <FaParking className="chardlist-icon-left" />
+          <IoMdArrowRoundBack className="chardlist-icon-left" />
         </NavLink>
         <div className="chardlist-logo">
           <FaParking className="chardlist-icon-parking" />
@@ -68,28 +114,33 @@ const ChardParkez = () => {
       <div className="chardlist-pricing">
         <div className="chardlist-parkez-pricing">
           <div className="chardlist-cards">
-            {pricingPlans.map((plan, index) => (
-              <div key={index} className="chardlist-pricing-card">
-                <h3>{plan.title}</h3>
-                <p className="chardlist-pricing-card-desc">{plan.desc}</p>
-                <div className="chardlist-pricing-discount">
-                  <p>{plan.originalPrice}</p>
-                  <p className="chardlist-pricing-btn-discount">Diskon</p>
+            {pricingPlans
+              .filter((plan) => plan.tipe_paket === "parkez")
+              .slice(0, 4)
+              .map((plan, index) => (
+                <div key={index} className="chardlist-pricing-card">
+                  <h3>{plan.nama_paket}</h3>
+                  <p className="chardlist-pricing-card-desc">
+                    {plan.deskripsi}
+                  </p>
+                  <div className="chardlist-pricing-discount">
+                    <p>{plan.diskon}</p>
+                    <p className="chardlist-pricing-btn-discount">Diskon</p>
+                  </div>
+                  <p className="chardlist-pricing-price">{plan.harga}</p>
+                  <div className="chardlist-pricing-checkout">
+                    <NavLink onClick={() => handlePurchase(plan.id)}>
+                      Pilih Paket
+                    </NavLink>
+                  </div>
+                  <div className="chardlist-pricing-r"></div>
+                  <ul>
+                    {plan.benefits.split(",").map((benefit, i) => (
+                      <li key={i}>{benefit.trim()}</li>
+                    ))}
+                  </ul>
                 </div>
-                <p className="chardlist-pricing-price">
-                  {plan.discountedPrice}
-                </p>
-                <div className="chardlist-pricing-checkout">
-                  <a href="#">Pilih Paket</a>
-                </div>
-                <div className="chardlist-pricing-r"></div>
-                <ul>
-                  {plan.benefits.map((benefit, i) => (
-                    <li key={i}>{benefit}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+              ))}
           </div>
         </div>
       </div>

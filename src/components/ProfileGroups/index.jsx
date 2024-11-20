@@ -56,7 +56,7 @@ const ProfileGroups = () => {
             <NavLink to="/profile/kebijakan-privasi">Kebijakan Privasi</NavLink>
           </div>
           <div className="profile-row">
-            <NavLink to="/profile/s&k">Syarat & Ketentuan</NavLink>
+            <NavLink to="/Syarat-dan-ketentuan">Syarat & Ketentuan</NavLink>
           </div>
           <div className="profile-row">
             <NavLink to="/profile/bantuan">Bantuan</NavLink>

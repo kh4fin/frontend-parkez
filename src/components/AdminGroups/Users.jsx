@@ -13,7 +13,7 @@ const Users = () => {
       try {
         const response = await axiosInstance.get("/accounts/users/");
         setUsers(response.data);
-        console.log(response.data);
+        // console.log(response.data);
       } catch (error) {
         console.error("Error fetching users:", error);
       }

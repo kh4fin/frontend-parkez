@@ -25,34 +25,52 @@ const HomePricing = () => {
   }, []);
 
   useEffect(() => {
-    const loadMidtransScript = () => {
-      let scriptTag = document.createElement("script");
-      scriptTag.src = "https://app.midtrans.com/snap/snap.js";
-      scriptTag.setAttribute(
-        "data-client-key",
-        import.meta.env.VITE_MIDTRANS_CLIENT_KEY
-      );
-      document.body.appendChild(scriptTag);
-    };
+    const midtransScriptUrl = "https://app.sandbox.midtrans.com/snap/snap.js";
 
-    loadMidtransScript();
+    let scriptTag = document.createElement("script");
+    scriptTag.src = midtransScriptUrl;
+
+    const myMidtransClientKey = import.meta.env.VITE_MIDTRANS_CLIENT_KEY;
+    scriptTag.setAttribute("data-client-key", myMidtransClientKey);
+
+    document.body.appendChild(scriptTag);
+
+    return () => {
+      document.body.removeChild(scriptTag);
+    };
   }, []);
 
   const handlePurchase = async (planId) => {
     try {
-      // Meminta Snap token dari backend
       const response = await axiosInstance.post(
         `${import.meta.env.VITE_API_URL}/api/beli-paket/`,
-        { paketId: planId }
+        {
+          paketId: planId,
+        }
       );
 
-      const { snapToken } = response.data;
+      const { snapToken, midtrans_url } = response.data;
       console.log(response.data);
 
-      // Memunculkan Midtrans Snap Popup
       window.snap.pay(snapToken, {
-        onSuccess: function (result) {
+        onSuccess: async function (result) {
           alert("Pembayaran berhasil!");
+
+          try {
+            await axiosInstance.post(
+              `${import.meta.env.VITE_API_URL}/api/midtrans-notification/`,
+              {
+                transactionId: result.transaction_id,
+                orderId: result.order_id,
+                status: result.transaction_status,
+              }
+            );
+
+            window.location.href = "/home";
+          } catch (error) {
+            console.error("Error saat mengirim data transaksi:", error);
+          }
+
           console.log(result);
         },
         onPending: function (result) {
@@ -121,6 +139,7 @@ const HomePricing = () => {
                     Pilih Paket
                   </NavLink>
                 </div>
+                <div className="home-pricing-r"></div>
                 <ul>
                   {plan.benefits.split(",").map((benefit, i) => (
                     <li key={i}>{benefit.trim()}</li>
@@ -148,6 +167,7 @@ const HomePricing = () => {
                     Pilih Paket
                   </NavLink>
                 </div>
+                <div className="home-pricing-r"></div>
                 <ul>
                   {plan.benefits.split(",").map((benefit, i) => (
                     <li key={i}>{benefit.trim()}</li>
@@ -192,6 +212,7 @@ const HomePricing = () => {
                     Pilih Paket
                   </a>
                 </div>
+                <div className="home-pricing-r"></div>
                 <ul>
                   {plan.benefits.split(",").map((benefit, i) => (
                     <li key={i}>{benefit.trim()}</li>

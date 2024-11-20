@@ -15,6 +15,8 @@ import Waiting from "./pages/Auth/Waiting";
 import Parkir from "./pages/Parkir";
 import History from "./pages/History";
 import Profile from "./pages/Profile";
+import QRcode from "./pages/QRcode";
+import SandK from "./components/ProfileGroups/SandK";
 
 function App() {
   return (
@@ -41,8 +43,10 @@ function App() {
         <Route path="/ezgarage-lists" element={<ParkezChardList />} />
         <Route path="/lokasi" element={<Lokasi />} />
         <Route path="/parkir" element={<Parkir />} />
+        <Route path="/qrcode/:id" element={<QRcode />} />
         <Route path="/riwayat" element={<History />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/Syarat-dan-ketentuan" element={<SandK />} />
 
         {/* Dashboard Admin Routes */}
         <Route path="/dashboard-admin/*" element={<Dashboard />} />
