@@ -44,6 +44,22 @@ const Users = () => {
     setFilteredUsers(filtered);
   };
 
+  const handleDelete = async (id) => {
+    const confirmDelete = window.confirm(
+      "Apakah Anda yakin ingin menghapus user ini?"
+    );
+    if (confirmDelete) {
+      try {
+        await axiosInstance.delete(`/accounts/users/${id}/`);
+        setUsers(users.filter((user) => user.id !== id));
+        alert("User berhasil dihapus.");
+      } catch (error) {
+        console.error("Error deleting User:", error);
+        alert("Gagal menghapus user. Silakan coba lagi.");
+      }
+    }
+  };
+
   return (
     <div className="p-6">
       <h2 className="text-2xl font-semibold mb-4">List Users</h2>
@@ -83,7 +99,7 @@ const Users = () => {
           {filteredUsers.length > 0 ? (
             filteredUsers.map((user, index) => (
               <tr key={index}>
-                <td className="border px-4 py-2 text-center">{user.id}</td>
+                <td className="border px-4 py-2 text-center">{(index += 1)}</td>
                 <td className="border px-4 py-2 text-center">
                   {user.first_name}
                 </td>
@@ -96,12 +112,12 @@ const Users = () => {
                   >
                     Edit
                   </NavLink>
-                  <NavLink
-                    to={`/dashboard-admin/users/${user.id}`}
+                  <button
                     className="bg-red-500 text-white px-2 py-1 rounded ml-2"
+                    onClick={() => handleDelete(user.id)}
                   >
                     Delete
-                  </NavLink>
+                  </button>
                 </td>
               </tr>
             ))
