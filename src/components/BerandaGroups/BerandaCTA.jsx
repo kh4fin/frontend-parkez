@@ -11,7 +11,7 @@ const BerandaCTA = () => {
           Daftar sekarang dan nikmati kemudahan parkir di lokasi favorit Anda
           tanpa repot!
         </p>
-        <NavLink to="/register" className="beranda-btn-cta">
+        <NavLink to="/login" className="beranda-btn-cta">
           Mulai Sekarang
         </NavLink>
       </div>

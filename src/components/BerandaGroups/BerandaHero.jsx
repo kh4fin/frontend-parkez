@@ -9,7 +9,7 @@ const BerandaHero = () => {
       <div className="beranda-content">
         <h1>Parkir Mudah Dimanapun Anda Berada</h1>
         <p>Langganan parkir bulanan di lokasi favorit Anda tanpa repot.</p>
-        <NavLink to="/subscribe" className="bernda-btn-cta">
+        <NavLink to="/login" className="bernda-btn-cta">
           Mulai Berlangganan
         </NavLink>
       </div>

@@ -30,6 +30,7 @@ const Login = () => {
 
       localStorage.setItem("authToken", access);
       localStorage.setItem("refreshToken", refresh);
+      // localStorage.setItem("user", JSON.stringify(user));
       alert("Login successful!");
       navigate("/home");
     } catch (error) {

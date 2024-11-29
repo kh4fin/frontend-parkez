@@ -17,6 +17,9 @@ import History from "./pages/History";
 import Profile from "./pages/Profile";
 import QRcode from "./pages/QRcode";
 import SandK from "./components/ProfileGroups/SandK";
+import LokasiDetail from "./components/LokasiGroups/LokasiDetail";
+import Rute from "./components/LokasiGroups/Rute";
+import ScanQRCode from "./components/ParkirGroups/ScanQRCode";
 
 function App() {
   return (
@@ -42,8 +45,11 @@ function App() {
         <Route path="/parkez-lists" element={<ParkezChardList />} />
         <Route path="/ezgarage-lists" element={<ParkezChardList />} />
         <Route path="/lokasi" element={<Lokasi />} />
+        <Route path="/lokasi/:id" element={<LokasiDetail />} />
+        <Route path="/rute/:id" element={<Rute />} />
         <Route path="/parkir" element={<Parkir />} />
         <Route path="/qrcode/:id" element={<QRcode />} />
+        <Route path="/scan" element={<ScanQRCode />} />
         <Route path="/riwayat" element={<History />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/Syarat-dan-ketentuan" element={<SandK />} />

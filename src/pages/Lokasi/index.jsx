@@ -5,6 +5,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import LokasiHeader from "../../components/LokasiGroups/LokasiHeader";
 import LokasiOne from "../../components/LokasiGroups/LokasiOne";
 import LokasiTwo from "../../components/LokasiGroups/LokasiTwo";
+import LokasiGroups from "../../components/LokasiGroups";
 
 const Lokasi = () => {
   const [user, setUser] = useState(null);
@@ -33,9 +34,10 @@ const Lokasi = () => {
   return (
     <div>
       <Navbar />
-      <LokasiHeader />
-      <LokasiOne />
-      <LokasiTwo />
+      <LokasiGroups />
+      {/* <LokasiHeader /> */}
+      {/* <LokasiOne /> */}
+      {/* <LokasiTwo /> */}
     </div>
   );
 };
