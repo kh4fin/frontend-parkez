@@ -48,7 +48,7 @@ const ProfileGroups = () => {
           <img src={imgProfile} alt="profile" />
           <div className="profile-info">
             <h2>{user ? user.first_name : "User"}</h2>
-            <NavLink to="/profile/edit">edit profile</NavLink>
+            <NavLink to="/profile/user-info">info detail</NavLink>
           </div>
         </div>
         <div className="profile-rows">

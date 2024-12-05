@@ -13,6 +13,7 @@ import PacketEdit from "../../components/AdminGroups/PacketEdit";
 import Partners from "../../components/AdminGroups/Partners";
 import PartnersAdd from "../../components/AdminGroups/PartnersAdd";
 import PartnersEdit from "../../components/AdminGroups/PartnersEdit";
+import History from "../../components/AdminGroups/History";
 
 const Dashboard = () => {
   const [userRole, setUserRole] = useState(null);
@@ -68,6 +69,7 @@ const Dashboard = () => {
           <Route path="partners" element={<Partners />} />
           <Route path="partners/add" element={<PartnersAdd />} />
           <Route path="partners/:id/edit" element={<PartnersEdit />} />
+          <Route path="history/" element={<History />} />
         </Routes>
       </div>
     </div>

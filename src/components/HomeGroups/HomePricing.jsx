@@ -50,28 +50,28 @@ const HomePricing = () => {
       );
 
       const { snapToken, midtrans_url } = response.data;
-      console.log(response.data);
 
       window.snap.pay(snapToken, {
         onSuccess: async function (result) {
           alert("Pembayaran berhasil!");
 
           try {
-            await axiosInstance.post(
-              `${import.meta.env.VITE_API_URL}/api/midtrans-notification/`,
+            const transaksiId = result.order_id.split("-").pop();
+
+            await axiosInstance.patch(
+              `${
+                import.meta.env.VITE_API_URL
+              }/api/midtrans-notification/${transaksiId}/`,
               {
-                transactionId: result.transaction_id,
-                orderId: result.order_id,
-                status: result.transaction_status,
+                transaction_status: result.transaction_status,
               }
             );
 
-            window.location.href = "/home";
+            // Mengarahkan ke halaman /home setelah sukses
+            window.location.assign("/home");
           } catch (error) {
             console.error("Error saat mengirim data transaksi:", error);
           }
-
-          console.log(result);
         },
         onPending: function (result) {
           alert("Pembayaran pending, menunggu konfirmasi.");

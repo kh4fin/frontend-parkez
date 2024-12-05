@@ -20,6 +20,9 @@ import SandK from "./components/ProfileGroups/SandK";
 import LokasiDetail from "./components/LokasiGroups/LokasiDetail";
 import Rute from "./components/LokasiGroups/Rute";
 import ScanQRCode from "./components/ParkirGroups/ScanQRCode";
+import ParkirQRcode from "./components/ParkirGroups/ParkirQrcode";
+import UserDetail from "./pages/Profile/UserDetail";
+import EditUser from "./components/ProfileGroups/EditUser";
 
 function App() {
   return (
@@ -48,11 +51,17 @@ function App() {
         <Route path="/lokasi/:id" element={<LokasiDetail />} />
         <Route path="/rute/:id" element={<Rute />} />
         <Route path="/parkir" element={<Parkir />} />
-        <Route path="/qrcode/:id" element={<QRcode />} />
+        <Route path="/qrcode/:id" element={<ParkirQRcode />} />
         <Route path="/scan" element={<ScanQRCode />} />
         <Route path="/riwayat" element={<History />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/user-info" element={<UserDetail />} />
+        <Route path="/edit-profile" element={<EditUser />} />
         <Route path="/Syarat-dan-ketentuan" element={<SandK />} />
+        <Route
+          path="https://example.com/?order_id=order-43&status_code=200&transaction_status=settlement"
+          element={<EmailVerification />}
+        />
 
         {/* Dashboard Admin Routes */}
         <Route path="/dashboard-admin/*" element={<Dashboard />} />
