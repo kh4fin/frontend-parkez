@@ -8,11 +8,13 @@ const History = () => {
   const [selectedStatus, setSelectedStatus] = useState("All");
   const [selectedYear, setSelectedYear] = useState("All");
   const [filteredTransaksi, setFilteredTransaksi] = useState([]);
+  const [sortOrder, setSortOrder] = useState("asc");
 
   useEffect(() => {
     const fetchTransaksi = async () => {
       try {
         const response = await axiosInstance.get("/api/transaksi-paket/");
+        console.log(response.data);
         setTransaksi(response.data);
       } catch (error) {
         console.error("Error fetching transactions:", error);
@@ -24,7 +26,7 @@ const History = () => {
 
   useEffect(() => {
     filterTransaksi();
-  }, [selectedStatus, selectedYear, transaksi]);
+  }, [selectedStatus, selectedYear, transaksi, sortOrder]);
 
   const filterTransaksi = () => {
     let filtered = transaksi;
@@ -43,7 +45,15 @@ const History = () => {
       );
     }
 
+    filtered.sort((a, b) => {
+      return sortOrder === "asc" ? a.id - b.id : b.id - a.id;
+    });
+
     setFilteredTransaksi(filtered);
+  };
+
+  const handleSortById = () => {
+    setSortOrder(sortOrder === "asc" ? "desc" : "asc");
   };
 
   const exportToExcel = () => {
@@ -98,7 +108,12 @@ const History = () => {
       <table className="min-w-full bg-white">
         <thead className="bg-gray-300">
           <tr>
-            <th className="border px-4 py-2">ID</th>
+            <th className="border px-4 py-2">
+              <button onClick={handleSortById} className="font-bold">
+                ID {sortOrder === "asc" ? "↑" : "↓"}
+              </button>
+            </th>
+            <th className="border px-4 py-2">User</th>
             <th className="border px-4 py-2">Paket</th>
             <th className="border px-4 py-2">Harga</th>
             <th className="border px-4 py-2">Status</th>
@@ -110,6 +125,9 @@ const History = () => {
             filteredTransaksi.map((item, index) => (
               <tr key={index}>
                 <td className="border px-4 py-2 text-center">{index + 1}</td>
+                <td className="border px-4 py-2 text-center">
+                  {item.user_name}
+                </td>
                 <td className="border px-4 py-2 text-center">
                   {item.paket.nama_paket}
                 </td>

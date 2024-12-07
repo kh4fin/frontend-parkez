@@ -10,6 +10,8 @@ const PartnersEdit = () => {
     lokasi: "",
     tipe_kendaraan: "",
     koordinat: "",
+    latitude: "",
+    longitude: "",
     kapasitas: "",
     terpakai: "",
   });
@@ -31,6 +33,8 @@ const PartnersEdit = () => {
           lokasi: response.data.lokasi,
           tipe_kendaraan: response.data.tipe_kendaraan,
           koordinat: response.data.koordinat,
+          latitude: response.data.latitude,
+          longitude: response.data.longitude,
           kapasitas: response.data.kapasitas,
           terpakai: response.data.terpakai,
         });
@@ -120,6 +124,30 @@ const PartnersEdit = () => {
         </div>
 
         <div>
+          <label className="block mb-2 text-sm font-medium">Latitude</label>
+          <input
+            type="text"
+            name="latitude"
+            value={formData.latitude}
+            onChange={handleChange}
+            className="border p-2 rounded w-full"
+            required
+          />
+        </div>
+
+        <div>
+          <label className="block mb-2 text-sm font-medium">Longitude</label>
+          <input
+            type="text"
+            name="longitude"
+            value={formData.longitude}
+            onChange={handleChange}
+            className="border p-2 rounded w-full"
+            required
+          />
+        </div>
+
+        {/* <div>
           <label className="block mb-2 text-sm font-medium">
             Koordinat Maps
           </label>
@@ -131,7 +159,7 @@ const PartnersEdit = () => {
             className="border p-2 rounded w-full"
             required
           />
-        </div>
+        </div> */}
 
         <div>
           <label className="block mb-2 text-sm font-medium">Kapasitas</label>

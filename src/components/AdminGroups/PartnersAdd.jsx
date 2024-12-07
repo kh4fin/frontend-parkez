@@ -10,6 +10,8 @@ const PartnersAdd = () => {
     lokasi: "",
     tipe_kendaraan: "",
     koordinat: "",
+    latitude: "",
+    longitude: "",
     kapasitas: "",
     terpakai: "",
   });
@@ -86,13 +88,23 @@ const PartnersAdd = () => {
         </div>
 
         <div>
-          <label className="block mb-2 text-sm font-medium">
-            Koordinat Maps
-          </label>
+          <label className="block mb-2 text-sm font-medium">Latitude</label>
           <input
             type="text"
-            name="koordinat"
-            value={formData.koordinat}
+            name="latitude"
+            value={formData.latitude}
+            onChange={handleChange}
+            className="border p-2 rounded w-full"
+            required
+          />
+        </div>
+
+        <div>
+          <label className="block mb-2 text-sm font-medium">Longitude</label>
+          <input
+            type="text"
+            name="longitude"
+            value={formData.longitude}
             onChange={handleChange}
             className="border p-2 rounded w-full"
             required

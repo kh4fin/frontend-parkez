@@ -53,25 +53,39 @@ const HomePricing = () => {
 
       window.snap.pay(snapToken, {
         onSuccess: async function (result) {
-          alert("Pembayaran berhasil!");
+          const transaksiId = result.order_id.split("-").pop();
 
-          try {
-            const transaksiId = result.order_id.split("-").pop();
+          await axiosInstance.patch(
+            `${
+              import.meta.env.VITE_API_URL
+            }/api/midtrans-notification/${transaksiId}/`,
+            {
+              transaction_status: result.transaction_status,
+            }
+          );
 
-            await axiosInstance.patch(
-              `${
-                import.meta.env.VITE_API_URL
-              }/api/midtrans-notification/${transaksiId}/`,
-              {
-                transaction_status: result.transaction_status,
-              }
-            );
+          // Mengarahkan ke halaman /home setelah sukses
+          window.location.assign("/home");
+          confirm("Pembayaran berhasil!");
+          // alert("Pembayaran berhasil!");
 
-            // Mengarahkan ke halaman /home setelah sukses
-            window.location.assign("/home");
-          } catch (error) {
-            console.error("Error saat mengirim data transaksi:", error);
-          }
+          // try {
+          //   const transaksiId = result.order_id.split("-").pop();
+
+          //   await axiosInstance.patch(
+          //     `${
+          //       import.meta.env.VITE_API_URL
+          //     }/api/midtrans-notification/${transaksiId}/`,
+          //     {
+          //       transaction_status: result.transaction_status,
+          //     }
+          //   );
+
+          //   // Mengarahkan ke halaman /home setelah sukses
+          //   window.location.assign("/home");
+          // } catch (error) {
+          //   console.error("Error saat mengirim data transaksi:", error);
+          // }
         },
         onPending: function (result) {
           alert("Pembayaran pending, menunggu konfirmasi.");

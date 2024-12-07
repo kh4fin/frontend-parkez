@@ -53,16 +53,15 @@ const ProfileGroups = () => {
         </div>
         <div className="profile-rows">
           <div className="profile-row">
-            <NavLink to="/profile/kebijakan-privasi">Kebijakan Privasi</NavLink>
+            <NavLink to="/profile/kebijakan-privasi/">
+              Kebijakan Privasi
+            </NavLink>
           </div>
           <div className="profile-row">
             <NavLink to="/Syarat-dan-ketentuan">Syarat & Ketentuan</NavLink>
           </div>
           <div className="profile-row">
             <NavLink to="/profile/bantuan">Bantuan</NavLink>
-          </div>
-          <div className="profile-row">
-            <NavLink to="/profile/pengaturan">Pengaturan Akun</NavLink>
           </div>
           <div className="profile-row">
             <button
