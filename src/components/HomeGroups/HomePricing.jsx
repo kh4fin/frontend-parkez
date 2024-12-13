@@ -126,7 +126,7 @@ const HomePricing = () => {
               <i className="fas fa-parking"></i>
               park<span>EZ</span>
             </div>
-            <p>Lorem ipsum dolor sit amet.</p>
+            {/* <p>Lorem ipsum dolor sit amet.</p> */}
           </div>
           <div className="home-pricing-right">
             <NavLink to="/parkez-lists" className="home-pricing-lihatSemua">
@@ -144,10 +144,22 @@ const HomePricing = () => {
                 <h3>{plan.nama_paket}</h3>
                 <p className="home-pricing-card-desc">{plan.deskripsi}</p>
                 <div className="home-pricing-discount">
-                  <p>{plan.diskon}</p>
+                  <p>
+                    {new Intl.NumberFormat("id-ID", {
+                      style: "currency",
+                      currency: "IDR",
+                      minimumFractionDigits: 0,
+                    }).format(plan.diskon)}
+                  </p>
                   <p className="home-pricing-btn-discount">Diskon</p>
                 </div>
-                <p className="home-pricing-price">{plan.harga}</p>
+                <p className="home-pricing-price">
+                  {new Intl.NumberFormat("id-ID", {
+                    style: "currency",
+                    currency: "IDR",
+                    minimumFractionDigits: 0,
+                  }).format(plan.harga)}
+                </p>
                 <div className="home-pricing-checkout">
                   <NavLink onClick={() => handlePurchase(plan.id)}>
                     Pilih Paket
@@ -172,10 +184,22 @@ const HomePricing = () => {
                 <h3>{plan.nama_paket}</h3>
                 <p className="home-pricing-card-desc">{plan.deskripsi}</p>
                 <div className="home-pricing-discount">
-                  <p>{plan.diskon}</p>
+                  <p>
+                    {new Intl.NumberFormat("id-ID", {
+                      style: "currency",
+                      currency: "IDR",
+                      minimumFractionDigits: 0,
+                    }).format(plan.diskon)}
+                  </p>
                   <p className="home-pricing-btn-discount">Diskon</p>
                 </div>
-                <p className="home-pricing-price">{plan.harga}</p>
+                <p className="home-pricing-price">
+                  {new Intl.NumberFormat("id-ID", {
+                    style: "currency",
+                    currency: "IDR",
+                    minimumFractionDigits: 0,
+                  }).format(plan.harga)}
+                </p>
                 <div className="home-pricing-checkout">
                   <NavLink onClick={() => handlePurchase(plan.id)}>
                     Pilih Paket
@@ -199,7 +223,7 @@ const HomePricing = () => {
               <i className="fas fa-parking"></i>
               EZ<span>Garage</span>
             </div>
-            <p>Lorem ipsum dolor sit amet.</p>
+            {/* <p>Lorem ipsum dolor sit amet.</p> */}
           </div>
           <div className="home-pricing-right">
             <NavLink to="/ezgarage-lists" className="home-pricing-lihatSemua">
@@ -217,10 +241,22 @@ const HomePricing = () => {
                 <h3>{plan.nama_paket}</h3>
                 <p className="home-pricing-card-desc">{plan.deskripsi}</p>
                 <div className="home-pricing-discount">
-                  <p>{plan.diskon}</p>
+                  <p>
+                    {new Intl.NumberFormat("id-ID", {
+                      style: "currency",
+                      currency: "IDR",
+                      minimumFractionDigits: 0,
+                    }).format(plan.diskon)}
+                  </p>
                   <p className="home-pricing-btn-discount">Diskon</p>
                 </div>
-                <p className="home-pricing-price">{plan.harga}</p>
+                <p className="home-pricing-price">
+                  {new Intl.NumberFormat("id-ID", {
+                    style: "currency",
+                    currency: "IDR",
+                    minimumFractionDigits: 0,
+                  }).format(plan.harga)}
+                </p>
                 <div className="home-pricing-checkout">
                   <a href="#" onClick={() => handlePurchase(plan.id)}>
                     Pilih Paket
@@ -245,10 +281,22 @@ const HomePricing = () => {
                 <h3>{plan.nama_paket}</h3>
                 <p className="home-pricing-card-desc">{plan.deskripsi}</p>
                 <div className="home-pricing-discount">
-                  <p>{plan.diskon}</p>
+                  <p>
+                    {new Intl.NumberFormat("id-ID", {
+                      style: "currency",
+                      currency: "IDR",
+                      minimumFractionDigits: 0,
+                    }).format(plan.diskon)}
+                  </p>
                   <p className="home-pricing-btn-discount">Diskon</p>
                 </div>
-                <p className="home-pricing-price">{plan.harga}</p>
+                <p className="home-pricing-price">
+                  {new Intl.NumberFormat("id-ID", {
+                    style: "currency",
+                    currency: "IDR",
+                    minimumFractionDigits: 0,
+                  }).format(plan.harga)}
+                </p>
                 <div className="home-pricing-checkout">
                   <a href="#" onClick={() => handlePurchase(plan.id)}>
                     Pilih Paket

@@ -11,7 +11,7 @@ const HomeHero = ({ user }) => {
             <h1>Selamat Datang {user ? user.first_name : "User"}</h1>
           </div>
           <div className="r"></div>
-          <div className="home-info">
+          {/* <div className="home-info">
             <div className="home-parkez">
               <div className="home-logo">parkEZ</div>
               <p>Status : Belum Berlangganan</p>
@@ -22,7 +22,7 @@ const HomeHero = ({ user }) => {
               <p>Status : Belum Berlangganan</p>
               <p>Hingga : 18/09/2024</p>
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="home-iklan">
           <img src={iklan} alt="iklan" />

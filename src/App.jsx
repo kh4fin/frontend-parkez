@@ -24,6 +24,7 @@ import ParkirQRcode from "./components/ParkirGroups/ParkirQrcode";
 import UserDetail from "./pages/Profile/UserDetail";
 import EditUser from "./components/ProfileGroups/EditUser";
 import PrivacyPolicy from "./components/ProfileGroups/PrivacyPolicy";
+import FAQ from "./components/ProfileGroups/FAQ";
 
 function App() {
   return (
@@ -57,6 +58,7 @@ function App() {
         <Route path="/riwayat" element={<History />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/profile/kebijakan-privasi" element={<PrivacyPolicy />} />
+        <Route path="/profile/bantuan" element={<FAQ />} />
         <Route path="/profile/user-info" element={<UserDetail />} />
         <Route path="/edit-profile" element={<EditUser />} />
         <Route path="/Syarat-dan-ketentuan" element={<SandK />} />
